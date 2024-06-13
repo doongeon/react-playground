@@ -1,0 +1,99 @@
+:root {
+  --transition-duration: 0.3s;
+  --board-width: 90%;
+  --image-width: 50px;
+  --image-border-width: 5px;
+  --gap-between-image-name: 10px;
+  --icon-board-item-index: 0;
+  --icon-board-x-margin: auto;
+  --grid-gap: 1px;
+  --name-size: 12px;
+  --name_weight: 500;
+  --image-background: radial-gradient(
+      ellipse at left top,
+      rgb(0, 229, 255),
+      transparent
+    ),
+    radial-gradient(ellipse at left bottom, rgb(255, 0, 255), transparent),
+    radial-gradient(ellipse at right, rgb(255, 184, 198), transparent);
+}
+
+@media (min-width: 576px) {
+  :root {
+    --image-width: 80px;
+    --grid-gap: 15px;
+    --name-size: 16px;
+    --name_weight: 600;
+  }
+}
+
+@media (min-width: 768px) {
+  :root {
+    --board-width: 100%;
+    --image-width: 100px;
+    --name-size: 20px;
+    --image-border-width: 5px;
+    --gap-between-image-name: 10px;
+    --icon-board-item-index: 0;
+    --grid-gap: 30px;
+    --name_weight: 700;
+  }
+}
+
+@media (min-width: 992px) {
+  :root {
+    --board-width: 700px;
+    --icon-board-x-margin: 0;
+  }
+}
+
+.icon-board {
+  width: var(--board-width);
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: var(--grid-gap);
+  margin: 0 var(--icon-board-x-margin);
+}
+
+.icon-board-item {
+  opacity: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--gap-between-image-name);
+}
+
+.icon-board-item.fade-in-animation {
+  animation-delay: calc(var(--icon-board-item-index) * 0.2s);
+}
+
+.icon-board-item__image-container {
+  position: relative;
+  background: var(--image-background);
+  width: calc(var(--image-width) + var(--image-border-width));
+  aspect-ratio: 1/1;
+  border-radius: 50%;
+  transition-timing-function: linear;
+  transition-duration: var(--transition-duration);
+
+  &:hover {
+    transform: scale(1.05);
+  }
+}
+
+.icon-board-item__image {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: var(--image-width);
+  border-radius: 50%;
+  transition-timing-function: linear;
+  transition-duration: var(--transition-duration);
+}
+
+.icon-board-item__name {
+  text-align: center;
+  font-size: var(--name-size);
+  font-weight: var(--name_weight);
+}
