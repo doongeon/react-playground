@@ -1,0 +1,110 @@
+:root {
+  --spread-board-height: 450px;
+  --spread-item-width: 110px;
+  --spread-center-width: 130px;
+  --spread-restart-btn-size: 35px;
+}
+
+@media (min-width: 576px) {
+  :root {
+    --spread-board-height: 700px;
+    --spread-item-width: 200px;
+    --spread-center-width: 300px;
+    --spread-restart-btn-size: 45px;
+  }
+}
+
+@media (min-width: 768px) {
+  :root {
+    --spread-board-height: 700px;
+    --spread-item-width: 200px;
+    --spread-center-width: 300px;
+    --spread-restart-btn-size: 50px;
+  }
+}
+
+@media (min-width: 992px) {
+  :root {
+    --spread-board-height: 700px;
+    --spread-item-width: 200px;
+    --spread-center-width: 300px;
+  }
+}
+
+.spread-board-container {
+  width: 100%;
+  background-color: white;
+}
+
+.spread-board {
+  position: relative;
+  width: 100%;
+  max-width: 1284px;
+  height: var(--spread-board-height);
+  margin: 0 auto;
+}
+
+.spread-board__center {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: var(--spread-center-width);
+  aspect-ratio: 4/3;
+  background-color: green;
+  z-index: 1;
+  transform: translate(-50%, -50%);
+}
+
+.spread_board__spread-item {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: var(--spread-item-width);
+  aspect-ratio: 4/3;
+  background-color: red;
+  transition: ease-in-out 1s;
+  transform: translate(-50%, -50%) scale(1.2);
+}
+
+.spread {
+  position: absolute;
+  top: calc(50% + var(--x) * 30%);
+  left: calc(50% + var(--y) * 30%);
+  transform: translate(-50%, -50%);
+  animation: floating linear infinite;
+  animation-duration: calc((var(--n) * 5s));
+}
+
+.spread-board__restart-btn {
+  position: absolute;
+  bottom: 5%;
+  right: 5%;
+  color: rgb(155, 155, 155);
+  width: var(--spread-restart-btn-size);
+  transition: linear 0.2s;
+}
+
+.spread-board__restart-btn-disabled {
+  color: #cfcfcf;
+}
+
+@media (hover: hover) {
+  .spread-board__restart-btn:hover {
+    color: #cfcfcf;
+  }
+}
+
+@keyframes floating {
+  0% {
+    transform: translate(-50%, -50%) translateY(0);
+  }
+  25% {
+    transform: translate(-50%, -50%) translateY(5px);
+  }
+  75% {
+    transform: translate(-50%, -50%) translateY(-5px);
+  }
+  100% {
+    transform: translate(-50%, -50%) translateY(0);
+  }
+}

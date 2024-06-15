@@ -1,0 +1,56 @@
+:root {
+  --content-section-title-size: 35px;
+  --content-section-title-weight: 700;
+  --content-section-title-padding-left: 20px;
+  --content-section-y-padding: 50px;
+  --content-section-title-margin-bottom: -20px;
+}
+
+@media (min-width: 576px) {
+  :root {
+    --content-section-title-size: 50px;
+    --content-section-title-weight: 700;
+    --content-section-title-padding-left: 20px;
+    --content-section-y-padding: 100px;
+    --content-section-title-margin-bottom: -20px;
+  }
+}
+
+@media (min-width: 768px) {
+  :root {
+    --content-section-title-size: 50px;
+    --content-section-title-weight: 700;
+    --content-section-title-padding-left: 40px;
+    --content-section-y-padding: 100px;
+    --content-section-title-margin-bottom: -20px;
+  }
+}
+
+@media (min-width: 992px) {
+  :root {
+    --content-section-title-size: 50px;
+    --content-section-title-weight: 700;
+    --content-section-title-padding-left: 60px;
+    --content-section-y-padding: 100px;
+  }
+}
+
+.content-section {
+  background-color: white;
+  display: flex;
+  flex-direction: column;
+  padding: var(--content-section-y-padding) 0;
+}
+
+.content-section__title-container {
+  width: 100%;
+  max-width: 1024px;
+  margin: 0 auto var(--content-section-title-margin-bottom) auto;
+  z-index: 1;
+}
+
+.content-section__title {
+  font-size: var(--content-section-title-size);
+  font-weight: var(--content-section-title-weight);
+  padding-left: var(--content-section-title-padding-left);
+}

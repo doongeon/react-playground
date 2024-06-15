@@ -3,23 +3,22 @@ import Header from "./components/header/Header";
 import Nav from "./components/nav/Nav";
 import Profile from "./components/profile/Profile";
 import Intro from "./components/intro/Intro";
-import Gallery from "./components/gallery/Gallery";
 import TeacherSection from "./components/teacher-section/teacher-section";
+import "./common/style/animations.css";
+import Philosophy from "./components/philosophy/Philosophy";
+import ContentSection from "./components/contents-section/ContentSection";
 
 function App() {
   return (
-    <>
+    <div className="App">
       <Header />
       <Profile />
       <Nav />
       <Intro />
-      <Gallery />
+      <Philosophy />
+      <ContentSection />
       <TeacherSection />
-      <div className="footer">
-        <span>https://github.com/doongeon</span>
-        <span>ndmb2012@gamil.com</span>
-      </div>
-    </>
+    </div>
   );
 }
 

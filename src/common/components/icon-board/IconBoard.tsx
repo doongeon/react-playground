@@ -3,31 +3,14 @@ import { IconBoardProps } from "./types";
 import { useEffect, useRef, useState } from "react";
 
 export default function IconBoard({ boardItems }: IconBoardProps) {
-  const ref = useRef<HTMLDivElement | null>(null);
-  const [isIntersecting, setIsIntersecting] = useState(false);
-
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      (entries: IntersectionObserverEntry[]) => {
-        if (entries[0].isIntersecting) setIsIntersecting(() => true);
-      },
-      { threshold: 0.6 }
-    );
-
-    observer.observe(ref.current!);
-
-    return () => {
-      observer.disconnect();
-    };
-  });
-
+  const { iconBoardRef, isIconBoardIntersecting } = useIconBoard();
   return (
-    <div className="icon-board" ref={ref}>
+    <div className="icon-board" ref={iconBoardRef}>
       {boardItems.map((boardItem, index) => {
         return (
           <div
             className={`icon-board-item ${
-              isIntersecting ? "fade-in-animation" : ""
+              isIconBoardIntersecting ? "fade-in-animation" : ""
             }`}
             style={{ animationDelay: `${index * 0.2}s` }}
             id={`icon-board-item${index}`}
@@ -41,4 +24,29 @@ export default function IconBoard({ boardItems }: IconBoardProps) {
       })}
     </div>
   );
+}
+
+function useIconBoard() {
+  const iconBoardRef = useRef<HTMLDivElement | null>(null);
+  const [isIconBoardIntersecting, setIsIconBoardIntersecting] = useState(false);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries: IntersectionObserverEntry[]) => {
+        if (entries[0].isIntersecting) setIsIconBoardIntersecting(() => true);
+      },
+      { threshold: 0.6 }
+    );
+
+    observer.observe(iconBoardRef.current!);
+
+    return () => {
+      observer.disconnect();
+    };
+  });
+
+  return {
+    iconBoardRef,
+    isIconBoardIntersecting,
+  };
 }

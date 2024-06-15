@@ -1,40 +1,52 @@
-.intro_section {
+:root {
+  --intro-section-y-padding: 50px;
+  --intro-section-width: 100px;
+  --intro-section-image-width: 100%;
+}
+
+.intro-section-container {
   width: 100%;
+  background-color: white;
+  padding: var(--intro-section-y-padding) 0;
+}
+
+.intro-section {
+  width: 100%;
+  max-width: 1024px;
   margin: 0 auto;
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
   gap: 2rem;
-  background-color: white;
-  min-height: 769px;
 }
 
-.intro_section div {
+.intro-section__image-container {
   position: relative;
-  width: 50%;
+  width: var(--intro-section-image-width);
   max-width: 320px;
   min-height: 600px;
   background-color: black;
   overflow: hidden;
 }
 
-.intro_section img {
+.intro-section__image {
   position: absolute;
 }
 
-.intro_section p {
+.intro-section__text-container {
   display: flex;
   flex-direction: column;
   gap: 1rem;
   padding: 1rem;
 }
 
-.intro_section h2 {
+.intro-section__title {
   font-size: 43px;
   font-weight: 900;
 }
 
-.intro_section span {
+.intro-section span {
   font-size: x-large;
   font-weight: bolder;
   color: rgba(0, 0, 0, 0.2);
@@ -44,13 +56,13 @@
   background-clip: text;
   background-size: 0% 100%;
 
-  animation: intro_section linear forwards;
+  animation: intro-section linear forwards;
   animation-timeline: view();
-  animation-range-start: cover 35vh;
-  animation-range-end: cover 45vh;
+  animation-range-start: cover 30vh;
+  animation-range-end: cover 40vh;
 }
 
-@keyframes intro_section {
+@keyframes intro-section {
   to {
     background-size: 100% 100%;
   }

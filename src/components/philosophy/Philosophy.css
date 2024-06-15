@@ -1,0 +1,53 @@
+:root {
+  --philosophy-section-y-padding: 30px;
+  --philosophy-section-title-size: 50px;
+  --philosophy-section-title-weight: 600;
+  --gap-between-title-snap-scroll: 5px;
+}
+
+@media (min-width: 576px) {
+  :root {
+    --philosophy-section-y-padding: 60px;
+    --philosophy-section-title-size: 50px;
+    --philosophy-section-title-weight: 600;
+    --gap-between-title-snap-scroll: 10px;
+  }
+}
+
+@media (min-width: 768px) {
+  :root {
+    --philosophy-section-y-padding: 80px;
+    --philosophy-section-title-size: 50px;
+    --philosophy-section-title-weight: 600;
+    --gap-between-title-snap-scroll: 20px;
+  }
+}
+
+@media (min-width: 992px) {
+  :root {
+    --philosophy-section-y-padding: 100px;
+    --philosophy-section-title-size: 50px;
+    --philosophy-section-title-weight: 600;
+    --gap-between-title-snap-scroll: 30px;
+  }
+}
+
+.philosophy-section {
+  padding: var(--philosophy-section-y-padding) 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--gap-between-title-snap-scroll);
+  background-color: white;
+}
+
+.philosophy-section__title-container {
+  width: 100%;
+  max-width: 1024px;
+  margin: 0 auto;
+}
+
+.philosophy-section__title {
+  font-size: var(--scroll-x-margin);
+  font-weight: var(--philosophy-section-title-weight);
+  padding-left: var(--scroll-x-margin);
+}
