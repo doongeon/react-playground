@@ -2,8 +2,10 @@ import Ball from "./Ball";
 import { Paddle } from "./Paddle";
 import { Stage } from "./Stage";
 import { BALL_SPEED, CANVAS_HEIGHT } from "./Contants";
+import BeepSound from "./BeepSound";
 
 export class CollisionDetector {
+  private beepSound = new BeepSound(400);
   public ball: Ball;
   public paddle: Paddle;
   public stage: Stage;
@@ -23,11 +25,9 @@ export class CollisionDetector {
   }
 
   private detectPaddleCollision() {
-    // 패들의 좌표 범위 계산
     const paddleLeftEdge = this.paddle.x;
     const paddleRightEdge = this.paddle.x + this.paddle.size.width;
 
-    // 충돌 감지 조건 수정
     if (
       this.ball.x + this.ball.size.radius >= paddleLeftEdge &&
       this.ball.x - this.ball.size.radius <= paddleRightEdge &&
@@ -35,17 +35,13 @@ export class CollisionDetector {
       this.ball.y - this.ball.size.radius <=
         this.paddle.y + this.paddle.size.height
     ) {
-      // 충돌 지점 계산
       const collisionPoint = this.ball.x - this.paddle.x;
 
-      // 패들의 중심으로부터의 거리를 -1에서 1 사이로 정규화
       const normalizedCollisionPoint =
         (collisionPoint / this.paddle.size.width) * 2 - 1;
 
-      // 반사 각도 계산
       const angle = normalizedCollisionPoint * (Math.PI / 4);
 
-      // 공의 속도 계산
       let newSpeed = BALL_SPEED;
       if (
         Math.abs(this.ball.dx) > BALL_SPEED ||
@@ -57,11 +53,9 @@ export class CollisionDetector {
       this.ball.dx = newSpeed * Math.sin(angle);
       this.ball.dy = -newSpeed * Math.cos(angle);
 
-      // 패들의 이동 방향에 따른 추가 속도 적용
       const paddleMoveVector = this.paddle.getPaddleMoveVector();
       this.ball.dx += paddleMoveVector * this.paddle.speed;
 
-      // 공의 위치 조정
       this.ball.y = this.paddle.y - this.ball.size.radius;
 
       return true;
@@ -73,8 +67,8 @@ export class CollisionDetector {
   private detectBrickCollision() {
     let collision = false;
 
-    for (let i = 0; i < this.stage.brickColumnCount; i++) {
-      for (let j = 0; j < this.stage.brickRowCount; j++) {
+    for (let i = 0; i < this.stage.brickRowCount; i++) {
+      for (let j = 0; j < this.stage.brickColumnCount; j++) {
         const brick = this.stage.bricks[i][j];
         if (!this.stage.bricks[i][j]) continue;
         if (brick.cracked) continue;
@@ -114,6 +108,7 @@ export class CollisionDetector {
             }
           }
 
+          this.beepSound.beep();
           brick.cracked = true;
           collision = true;
         }
