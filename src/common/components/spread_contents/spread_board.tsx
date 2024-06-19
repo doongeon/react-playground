@@ -57,9 +57,11 @@ export default function SpreadBoard() {
     <div className="spread-board-container">
       <div ref={spreadContentsRef} className="spread-board">
         <div className="spread-board__center"></div>
-        {[...Array(6)].map(() => {
+        {[...Array(6)].map((__, index) => {
           return (
             <div
+              style={{ backgroundImage: "/contents_01.png" }}
+              key={index}
               className={`spread_board__spread-item ${
                 isSpreadBoardIntersecting && "spread"
               }`}

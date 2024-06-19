@@ -9,6 +9,7 @@ export default function IconBoard({ boardItems }: IconBoardProps) {
       {boardItems.map((boardItem, index) => {
         return (
           <div
+          key={index}
             className={`icon-board-item ${
               isIconBoardIntersecting ? "fade-in-animation" : ""
             }`}
