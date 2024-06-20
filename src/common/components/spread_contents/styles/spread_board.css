@@ -56,17 +56,18 @@
 }
 
 .spread_board__spread-item {
+  opacity: 0;
   position: absolute;
   left: 50%;
   top: 50%;
-  width: var(--spread-item-width);
-  aspect-ratio: 4/3;
+  max-width: var(--spread-item-width);
   background-color: red;
   transition: ease-in-out 1s;
   transform: translate(-50%, -50%) scale(1.2);
 }
 
 .spread {
+  opacity: 1;
   position: absolute;
   top: calc(50% + var(--x) * 30%);
   left: calc(50% + var(--y) * 30%);
