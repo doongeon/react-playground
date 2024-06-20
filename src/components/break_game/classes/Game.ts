@@ -7,21 +7,37 @@ import { CANVAS_HEIGHT, CANVAS_WIDTH, FINAL_ROUND } from "./Contants";
 import MAPS from "./Maps";
 
 export class Game {
-  public ctx: CanvasRenderingContext2D;
-  public status = {
+  private ctx: CanvasRenderingContext2D;
+  private stage: Stage;
+  private paddle: Paddle;
+  private ball: Ball;
+  private collisionDetector: CollisionDetector;
+  private controller = new Controller();
+  private interval: any;
+  private status = {
     start: false,
     round: 1,
     life: 3,
     clear: false,
   };
-  public stage: Stage;
-  public paddle: Paddle;
-  public ball: Ball;
-  public collisionDetector: CollisionDetector;
-  public controller = new Controller
-  constructor(ctx: CanvasRenderingContext2D) {
+  private onGameEnd: (status: {
+    start: boolean;
+    round: number;
+    life: number;
+    clear: boolean;
+  }) => void;
+
+  constructor(
+    ctx: CanvasRenderingContext2D,
+    onGameEnd: (status: {
+      start: boolean;
+      round: number;
+      life: number;
+      clear: boolean;
+    }) => void | null
+  ) {
     this.ctx = ctx;
-    this.stage = new Stage(this.ctx, MAPS[0]);
+    this.stage = new Stage(this.ctx, MAPS[1]);
     this.paddle = new Paddle(ctx);
     this.ball = new Ball(ctx, this.paddle);
     this.collisionDetector = new CollisionDetector(
@@ -29,49 +45,54 @@ export class Game {
       this.paddle,
       this.stage
     );
+    this.onGameEnd = onGameEnd;
   }
 
   public run() {
     this.status.start = true;
+    this.status.clear = false;
     this.resetGame();
+    this.writeRound();
+    this.writeLife();
+    this.writeLeftBricks();
     this.play();
-    return this.status;
   }
 
   public play() {
     const interval = setInterval(() => {
+      if (!this.status.start) return;
+
       this.draw();
       const collision = this.collisionDetector.detect();
 
       if (this.controller.leftPressed) this.moveLeft();
       if (this.controller.rightPressed) this.moveRight();
       if (this.controller.spacePressed) this.shootBall();
-
       if (collision.falldown) this.discountLife();
+      if (collision.brick) this.writeLeftBricks();
+
       if (this.getLeftBricks() < 1) {
         this.stage.drawBricks();
         this.ball.stop();
-        setTimeout(() => this.nextStage(), 500);
-        // this.nextStage();
+        this.nextStage();
       }
-
-      document.getElementById(
-        "round"
-      )!.innerText = `round: ${this.status.round}`;
-      document.getElementById("life")!.innerText = "life: " + this.status.life;
-      document.getElementById("bricks")!.innerText =
-        "bricks: " + this.getLeftBricks();
 
       if (this.status.life < 1) {
         this.status.start = false;
+        clearInterval(this.interval);
+        this.onGameEnd(this.status);
       }
 
       if (this.status.round === FINAL_ROUND && this.getLeftBricks() < 1) {
-        clearInterval(interval);
+        clearInterval(this.interval);
+        this.status.clear = true;
+        this.onGameEnd(this.status);
       }
 
       console.log("frame");
     }, 16);
+
+    this.interval = interval;
   }
 
   private draw() {
@@ -109,19 +130,65 @@ export class Game {
     this.status.round = 1;
   }
 
+  public pauseGame() {
+    this.status.start = false;
+    clearInterval(this.interval);
+  }
+
+  public resumeGame() {
+    this.status.start = true;
+    this.play();
+  }
+
   private nextStage() {
-    this.ball.fixOnPaddle();
+    if (!this.status.start) return;
     if (this.status.round === FINAL_ROUND) return;
+
+    this.status.start = false;
+    this.ball.fixOnPaddle();
     this.status.round += 1;
-    this.stage = new Stage(this.ctx, MAPS[this.status.round - 1]);
+    this.stage = new Stage(this.ctx, MAPS[this.status.round]);
     this.collisionDetector = new CollisionDetector(
       this.ball,
       this.paddle,
       this.stage
     );
+
+    setTimeout(() => {
+      this.status.start = true;
+      this.writeRound();
+      this.writeLeftBricks();
+    }, 500);
   }
 
   private discountLife() {
     this.status.life -= 1;
+    this.writeLife();
+  }
+
+  private writeRound() {
+    const roundWindow = document.getElementById("round");
+    if (!roundWindow) return;
+
+    roundWindow.innerText = `round: ${this.status.round}`;
+  }
+
+  private writeLife() {
+    const lifeWindow = document.getElementById("life");
+    if (!lifeWindow) return;
+
+    lifeWindow.innerText = "life: " + this.status.life;
+  }
+
+  private writeLeftBricks() {
+    const leftBricksWindow = document.getElementById("bricks");
+    if (!leftBricksWindow) return;
+
+    leftBricksWindow.innerText = "bricks: " + this.getLeftBricks();
+  }
+
+  public cleanup() {
+    this.controller.free();
+    clearInterval(this.interval);
   }
 }
