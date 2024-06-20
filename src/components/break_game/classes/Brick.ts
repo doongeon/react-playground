@@ -1,3 +1,5 @@
+import { BRICK_BORDER_RADIUS } from "./Contants";
+
 export class Brick {
   private ctx: CanvasRenderingContext2D;
   public x: number;
@@ -11,65 +13,57 @@ export class Brick {
 
   constructor(
     ctx: CanvasRenderingContext2D,
-    x: number,
-    y: number,
+    position: {
+      x: number;
+      y: number;
+    },
     size: { width: number; height: number },
     color: string
   ) {
     this.ctx = ctx;
-    this.x = x;
-    this.y = y;
+    this.x = position.x;
+    this.y = position.y;
     this.size = size;
     this.color = color;
   }
 
   public draw() {
-    // 벽돌 모서리를 부드럽게 그리기 위해 상대적인 좌표값 계산
-    const borderRadius = 5;
-
     this.ctx.beginPath();
-    this.ctx.moveTo(this.x + borderRadius, this.y); // 좌상단
-    this.ctx.lineTo(this.x + this.size.width - borderRadius, this.y); // 우상단
+    this.ctx.moveTo(this.x + BRICK_BORDER_RADIUS, this.y); // 좌상단
+    this.ctx.lineTo(this.x + this.size.width - BRICK_BORDER_RADIUS, this.y); // 우상단
     this.ctx.quadraticCurveTo(
       this.x + this.size.width,
       this.y,
       this.x + this.size.width,
-      this.y + borderRadius
+      this.y + BRICK_BORDER_RADIUS
     ); // 우상단 모서리
     this.ctx.lineTo(
       this.x + this.size.width,
-      this.y + this.size.height - borderRadius
+      this.y + this.size.height - BRICK_BORDER_RADIUS
     ); // 우하단
     this.ctx.quadraticCurveTo(
       this.x + this.size.width,
       this.y + this.size.height,
-      this.x + this.size.width - borderRadius,
+      this.x + this.size.width - BRICK_BORDER_RADIUS,
       this.y + this.size.height
     ); // 우하단 모서리
-    this.ctx.lineTo(this.x + borderRadius, this.y + this.size.height); // 좌하단
+    this.ctx.lineTo(this.x + BRICK_BORDER_RADIUS, this.y + this.size.height); // 좌하단
     this.ctx.quadraticCurveTo(
       this.x,
       this.y + this.size.height,
       this.x,
-      this.y + this.size.height - borderRadius
+      this.y + this.size.height - BRICK_BORDER_RADIUS
     ); // 좌하단 모서리
-    this.ctx.lineTo(this.x, this.y + borderRadius); // 좌상단
-    this.ctx.quadraticCurveTo(this.x, this.y, this.x + borderRadius, this.y); // 좌상단 모서리
-
-    // 그림자 효과 추가
-    this.ctx.shadowColor = "rgba(0, 0, 0, 0.3)";
-    this.ctx.shadowBlur = 3;
-    this.ctx.shadowOffsetX = 2;
-    this.ctx.shadowOffsetY = 2;
+    this.ctx.lineTo(this.x, this.y + BRICK_BORDER_RADIUS); // 좌상단
+    this.ctx.quadraticCurveTo(
+      this.x,
+      this.y,
+      this.x + BRICK_BORDER_RADIUS,
+      this.y
+    ); // 좌상단 모서리
 
     this.ctx.fillStyle = this.color;
     this.ctx.fill();
     this.ctx.closePath();
-
-    // 그림자 효과 초기화
-    this.ctx.shadowColor = "transparent";
-    this.ctx.shadowBlur = 0;
-    this.ctx.shadowOffsetX = 0;
-    this.ctx.shadowOffsetY = 0;
   }
 }

@@ -20,7 +20,7 @@ export class Game {
     life: 3,
     clear: false,
   };
-  private onGameEnd: (status: {
+  private gameCallback: (status: {
     start: boolean;
     round: number;
     life: number;
@@ -29,7 +29,7 @@ export class Game {
 
   constructor(
     ctx: CanvasRenderingContext2D,
-    onGameEnd: (status: {
+    gameCallback: (status: {
       start: boolean;
       round: number;
       life: number;
@@ -45,7 +45,7 @@ export class Game {
       this.paddle,
       this.stage
     );
-    this.onGameEnd = onGameEnd;
+    this.gameCallback = gameCallback;
   }
 
   public run() {
@@ -70,24 +70,10 @@ export class Game {
       if (this.controller.spacePressed) this.shootBall();
       if (collision.falldown) this.discountLife();
       if (collision.brick) this.writeLeftBricks();
-
-      if (this.getLeftBricks() < 1) {
-        this.stage.drawBricks();
-        this.ball.stop();
-        this.nextStage();
-      }
-
-      if (this.status.life < 1) {
-        this.status.start = false;
-        clearInterval(this.interval);
-        this.onGameEnd(this.status);
-      }
-
-      if (this.status.round === FINAL_ROUND && this.getLeftBricks() < 1) {
-        clearInterval(this.interval);
-        this.status.clear = true;
-        this.onGameEnd(this.status);
-      }
+      if (this.status.round === FINAL_ROUND && this.getLeftBricks() < 1)
+        this.winGame();
+      if (this.getLeftBricks() < 1) this.nextStage();
+      if (this.status.life < 1) this.loseGame();
 
       console.log("frame");
     }, 16);
@@ -99,7 +85,7 @@ export class Game {
     this.clearCanvas();
     this.ball.draw();
     this.paddle.draw();
-    this.stage.drawBricks();
+    this.stage.drawStage();
   }
 
   private clearCanvas() {
@@ -122,7 +108,7 @@ export class Game {
   }
 
   private getLeftBricks() {
-    return this.stage.getTotalBricks();
+    return this.stage.getLeftBricks();
   }
 
   private resetGame() {
@@ -140,11 +126,25 @@ export class Game {
     this.play();
   }
 
+  private winGame() {
+    this.status.clear = true;
+    clearInterval(this.interval);
+    this.gameCallback(this.status);
+  }
+
+  private loseGame() {
+    this.status.start = false;
+    clearInterval(this.interval);
+    this.gameCallback(this.status);
+  }
+
   private nextStage() {
     if (!this.status.start) return;
     if (this.status.round === FINAL_ROUND) return;
 
-    this.status.start = false;
+    this.stage.drawStage(); // erase last brick
+    this.ball.stop();
+    this.status.start = false; // to avoid running fram on background
     this.ball.fixOnPaddle();
     this.status.round += 1;
     this.stage = new Stage(this.ctx, MAPS[this.status.round]);
@@ -154,6 +154,7 @@ export class Game {
       this.stage
     );
 
+    // start next stage after 500ms
     setTimeout(() => {
       this.status.start = true;
       this.writeRound();

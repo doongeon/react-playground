@@ -10,28 +10,33 @@ export class Controller {
     document.addEventListener("keyup", this.keyUpHandler);
   }
 
-  public keyDownHandler(e: KeyboardEvent) {
-    if (e.keyCode === 39) {
+  private keyDownHandler(e: KeyboardEvent) {
+    if (e.code === "ArrowRight") {
       this.rightPressed = true;
     }
-    if (e.keyCode === 37) {
+    if (e.code === "ArrowLeft") {
       this.leftPressed = true;
     }
-    if (e.keyCode === 32) {
+    if (e.code === "Space") {
       e.preventDefault();
       this.spacePressed = true;
     }
   }
 
-  public keyUpHandler(e: KeyboardEvent) {
-    if (e.keyCode === 39) {
+  private keyUpHandler(e: KeyboardEvent) {
+    if (e.code === "ArrowRight") {
       this.rightPressed = false;
     }
-    if (e.keyCode === 37) {
+    if (e.code === "ArrowLeft") {
       this.leftPressed = false;
     }
-    if (e.keyCode === 32) {
+    if (e.code === "Space") {
       this.spacePressed = false;
     }
+  }
+
+  public free() {
+    document.removeEventListener("keydown", this.keyDownHandler);
+    document.removeEventListener("keyup", this.keyUpHandler);
   }
 }

@@ -10,18 +10,16 @@ export default class BeepSound {
 
   private getOscillator() {
     const oscillator = this.audioCtx.createOscillator();
-    oscillator.type = "sine"; // 사인파 형태의 소리
-    oscillator.frequency.setValueAtTime(this.freq, this.audioCtx.currentTime); // 주파수 설정 (1000 Hz)
-    oscillator.connect(this.audioCtx.destination); // 출력 설정
+    oscillator.type = "sine";
+    oscillator.frequency.setValueAtTime(this.freq, this.audioCtx.currentTime);
+    oscillator.connect(this.audioCtx.destination);
 
     return oscillator;
   }
 
   public beep() {
     const oscillator = this.getOscillator();
-
     oscillator.start();
-
     setTimeout(() => {
       oscillator.stop();
     }, 100);

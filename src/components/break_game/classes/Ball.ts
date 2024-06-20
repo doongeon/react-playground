@@ -1,14 +1,20 @@
 import { Paddle } from "./Paddle";
-import { BALL_SPEED, CANVAS_HEIGHT, CANVAS_WIDTH } from "./Contants";
+import {
+  BALL_COLOR,
+  BALL_RADIUS,
+  BALL_SPEED,
+  CANVAS_HEIGHT,
+  CANVAS_WIDTH,
+} from "./Contants";
 
 export default class Ball {
   private ctx: CanvasRenderingContext2D;
   public dx = 0;
   public dy = BALL_SPEED;
-  public size = { radius: 8 };
-  public x = CANVAS_WIDTH / 2 - this.size.radius;
-  public y = CANVAS_HEIGHT - 400;
-  public color = "tomato";
+  public size = { radius: BALL_RADIUS };
+  public x = CANVAS_WIDTH / 2;
+  public y = CANVAS_HEIGHT / 2;
+  public color = BALL_COLOR;
   public status = {
     fixed: true,
   };
