@@ -1,24 +1,19 @@
-import "./App.css";
-import Header from "./components/header/Header";
-import Nav from "./components/nav/Nav";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
+import Home from "./routes/Home";
 import Profile from "./components/profile/Profile";
-import Intro from "./components/intro/Intro";
-import TeacherSection from "./components/teacher-section/teacher-section";
-import "./common/style/animations.css";
-import Philosophy from "./components/philosophy/Philosophy";
-import ContentSection from "./components/contents-section/ContentSection";
+import Nav from "./components/nav/Nav";
+import Games from "./routes/Games";
 
 function App() {
   return (
-    <div className="App">
-      <Header />
+    <BrowserRouter>
       <Profile />
       <Nav />
-      <Intro />
-      <Philosophy />
-      <ContentSection />
-      <TeacherSection />
-    </div>
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/games" element={<Games />} />
+      </Routes>
+    </BrowserRouter>
   );
 }
 
