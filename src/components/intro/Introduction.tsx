@@ -1,7 +1,7 @@
-import "./intro.css";
+import "./Introduction.css";
 import useTrackingCard from "./hooks/useTrackingCard";
 
-function Intro() {
+export default function Introduction() {
   const { cardRef, onMouseEnter, onMouseLeave } = useTrackingCard();
 
   return (
@@ -37,5 +37,3 @@ function Intro() {
     </section>
   );
 }
-
-export default Intro;

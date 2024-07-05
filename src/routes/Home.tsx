@@ -1,12 +1,12 @@
 import ContentSection from "../components/contents-section/ContentSection";
-import Intro from "../components/intro/intro";
+import Introduction from "../components/intro/Introduction";
 import Philosophy from "../components/philosophy/Philosophy";
 import TeacherSection from "../components/teacher-section/teacher-section";
 
 export default function Home() {
   return (
     <>
-      <Intro />
+      <Introduction />
       <Philosophy />
       <ContentSection />
       <TeacherSection />
