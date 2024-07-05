@@ -1,5 +1,5 @@
 import { useRecoilState } from "recoil";
-import { galleryModalOnAtom } from "../../util/atom";
+import { galleryModalOnAtom } from "../../utils/atom";
 import "./philosophy_modal.css";
 import { useEffect, useRef } from "react";
 import { XMarkIcon } from "@heroicons/react/16/solid";
@@ -51,13 +51,13 @@ export default function PhilosopyhModal() {
             src="https://512pixels.net/wp-content/uploads/2020/06/11-0-Color-Day-thumbnails-768x768.jpg"
           />
         </div>
-        <p className="modal__text-container">
+        <div className="modal__text-container">
           <h2 className="modal__title">단순한 코드</h2>
-          <p className="modal__detail">
+          <span className="modal__detail">
             Lorem ipsum dolor, sit amet consectetur adipisicing elit. Ipsam
             reiciendis hic ab ratione totam, distinctio
-          </p>
-        </p>
+          </span>
+        </div>
       </div>
     </div>
   );
