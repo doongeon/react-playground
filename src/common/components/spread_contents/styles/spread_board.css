@@ -66,11 +66,71 @@
   transform: translate(-50%, -50%) scale(1.2);
 }
 
-.spread {
+.random-spread {
   opacity: 1;
   position: absolute;
-  top: calc(50% + var(--x) * 30%);
-  left: calc(50% + var(--y) * 30%);
+  top: calc(50% + var(--x) * 50%);
+  left: calc(50% + var(--y) * 50%);
+  transform: translate(-50%, -50%);
+  animation: floating linear infinite;
+  animation-duration: calc((var(--n) * 5s));
+}
+
+.spread1 {
+  opacity: 1;
+  position: absolute;
+  top: calc(var(--x) * 10% + 30%);
+  left: 40%;
+  transform: translate(-50%, -50%);
+  animation: floating linear infinite;
+  animation-duration: calc((var(--n) * 5s));
+}
+
+.spread2 {
+  opacity: 1;
+  position: absolute;
+  top: 50%;
+  left: 20%;
+  transform: translate(-50%, -50%);
+  animation: floating linear infinite;
+  animation-duration: calc((var(--n) * 5s));
+}
+
+.spread3 {
+  opacity: 1;
+  position: absolute;
+  top: 80%;
+  left: 30%;
+  transform: translate(-50%, -50%);
+  animation: floating linear infinite;
+  animation-duration: calc((var(--n) * 5s));
+}
+
+.spread4 {
+  opacity: 1;
+  position: absolute;
+  top: 30%;
+  left: 70%;
+  transform: translate(-50%, -50%);
+  animation: floating linear infinite;
+  animation-duration: calc((var(--n) * 5s));
+}
+
+.spread5 {
+  opacity: 1;
+  position: absolute;
+  top: 40%;
+  left: 80%;
+  transform: translate(-50%, -50%);
+  animation: floating linear infinite;
+  animation-duration: calc((var(--n) * 5s));
+}
+
+.spread6 {
+  opacity: 1;
+  position: absolute;
+  top: 80%;
+  left: 60%;
   transform: translate(-50%, -50%);
   animation: floating linear infinite;
   animation-duration: calc((var(--n) * 5s));

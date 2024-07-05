@@ -11,7 +11,11 @@ export default function SpreadBoard() {
       <div ref={spreadBoardRef} className="spread-board">
         <div className="spread-board__center"></div>
         {[...Array(6)].map((__, index) => (
-          <SpreadItem key={index} imageUrl={`/images/content_${index}.png`} />
+          <SpreadItem
+            key={index}
+            imageUrl={`/images/content_${index + 1}.png`}
+            index={index}
+          />
         ))}
         <div>
           <RestartBtn />

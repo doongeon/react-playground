@@ -8,9 +8,9 @@ export function getRandomDuration() {
 }
 
 export function getRandomPosition() {
-  let position = Math.random() * 2 - 1;
+  let position = Math.random() - 0.5;
   while (Math.abs(position) < 0.3) {
-    position = Math.random() * 2 - 1;
+    position = Math.random() - 0.5;
   }
   return position;
 }
