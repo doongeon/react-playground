@@ -37,41 +37,6 @@ export default function GamePlayer() {
     fetchGame();
   }, [gameId]);
 
-  useEffect(() => {
-    const handleIframeMessage = (event: MessageEvent) => {
-      // Ensure that the message is from the expected origin
-      if (event.origin !== "https://dogwjefyhsbjy.cloudfront.net") return;
-
-      // Check if the message is to block scrolling
-      if (event.data === "block-keys") {
-        const handleKeyDown = (e: KeyboardEvent) => {
-          const keysToBlock = [
-            "ArrowUp",
-            "ArrowDown",
-            "ArrowLeft",
-            "ArrowRight",
-            " ",
-          ];
-          if (keysToBlock.includes(e.key)) {
-            e.preventDefault();
-          }
-        };
-
-        window.addEventListener("keydown", handleKeyDown);
-
-        return () => {
-          window.removeEventListener("keydown", handleKeyDown);
-        };
-      }
-    };
-
-    window.addEventListener("message", handleIframeMessage);
-
-    return () => {
-      window.removeEventListener("message", handleIframeMessage);
-    };
-  }, []);
-
   return (
     <div className="game-player">
       {isLoading ? (
@@ -89,13 +54,7 @@ export default function GamePlayer() {
               visit git repo
             </a>
           </div>
-          <iframe
-            ref={iframeRef}
-            src={game?.url}
-            width="600"
-            height="900"
-            scrolling="no"
-          />
+          <iframe ref={iframeRef} src={game?.url} width="600" height="900" />
           <Link to={"/games"}>목록으로</Link>
         </>
       )}
