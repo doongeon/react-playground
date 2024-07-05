@@ -1,6 +1,6 @@
 import { Link, useParams } from "react-router-dom";
 import "./game-player.css";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 interface TGameData {
   gameId: string;
@@ -13,6 +13,7 @@ interface TGameData {
 
 export default function GamePlayer() {
   const { gameId } = useParams();
+  const iframeRef = useRef<HTMLIFrameElement | null>(null);
   const [isLoading, setLoading] = useState(true);
   const [game, setGame] = useState<TGameData | undefined>();
 
@@ -37,17 +38,37 @@ export default function GamePlayer() {
   }, [gameId]);
 
   useEffect(() => {
-    const handleKeyDown = (event: KeyboardEvent) => {
-      if (
-        ["ArrowLeft", "ArrowUp", "ArrowRight", "ArrowDown"].includes(event.code)
-      )
-        event.preventDefault();
+    const handleIframeMessage = (event: MessageEvent) => {
+      // Ensure that the message is from the expected origin
+      if (event.origin !== "https://dogwjefyhsbjy.cloudfront.net") return;
+
+      // Check if the message is to block scrolling
+      if (event.data === "block-keys") {
+        const handleKeyDown = (e: KeyboardEvent) => {
+          const keysToBlock = [
+            "ArrowUp",
+            "ArrowDown",
+            "ArrowLeft",
+            "ArrowRight",
+            " ",
+          ];
+          if (keysToBlock.includes(e.key)) {
+            e.preventDefault();
+          }
+        };
+
+        window.addEventListener("keydown", handleKeyDown);
+
+        return () => {
+          window.removeEventListener("keydown", handleKeyDown);
+        };
+      }
     };
 
-    window.addEventListener("keydown", handleKeyDown);
+    window.addEventListener("message", handleIframeMessage);
 
     return () => {
-      window.removeEventListener("keydown", handleKeyDown);
+      window.removeEventListener("message", handleIframeMessage);
     };
   }, []);
 
@@ -68,7 +89,13 @@ export default function GamePlayer() {
               visit git repo
             </a>
           </div>
-          <iframe src={game?.url} width="600" height="900" />
+          <iframe
+            ref={iframeRef}
+            src={game?.url}
+            width="600"
+            height="900"
+            scrolling="no"
+          />
           <Link to={"/games"}>목록으로</Link>
         </>
       )}
