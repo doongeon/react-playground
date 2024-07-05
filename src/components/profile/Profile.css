@@ -1,3 +1,13 @@
+:root {
+  --home-img-height: 150px;
+}
+
+@media (min-width: 576px) {
+  :root {
+    --home-img-height: 300px;
+  }
+}
+
 .profile_wrap {
   display: flex;
   flex-direction: column;
@@ -5,7 +15,7 @@
 
 .home_img {
   width: full;
-  min-height: 25rem;
+  min-height: var(--home-img-height);
   background: radial-gradient(
       farthest-corner at 100px 40px,
       #ff0000,
