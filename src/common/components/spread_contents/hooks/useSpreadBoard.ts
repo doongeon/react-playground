@@ -11,6 +11,8 @@ export default function useSpreadBoard() {
   const restartAnimation = useRecoilValue(restartSpreadAtom);
 
   useEffect(() => {
+    setSpreadBoardIntersecting(false)
+
     const observer = new IntersectionObserver(
       (entries: IntersectionObserverEntry[]) => {
         if (entries[0].isIntersecting) setSpreadBoardIntersecting(true);
