@@ -7,7 +7,9 @@
   border-bottom: 1px solid #e1e1e1;
 }
 
-.nav__btn {
+.nav__btn,
+.nav__btn:visited {
   padding: 1rem;
   list-style: none;
+  color: #0968DA;
 }
