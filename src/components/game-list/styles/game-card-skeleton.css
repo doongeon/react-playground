@@ -1,0 +1,32 @@
+.loading-card {
+  width: var(--game-card-width);
+  position: relative;
+  width: 100%;
+  max-width: var(--game-card-width);
+  margin: 0 auto;
+  border-radius: 15px;
+  transition: linear 0.1s;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.2);
+}
+
+.loading-card__text-container {
+  width: calc(100% - 40px);
+  padding: 15px 20px;
+}
+
+.loading-card__title {
+  background-color: gray;
+  width: 50px;
+  height: 25px;
+  border-radius: 10px;
+}
+
+.loading-card__img {
+  width: 100%;
+  aspect-ratio: 1/1.1;
+  background-color: gray;
+}

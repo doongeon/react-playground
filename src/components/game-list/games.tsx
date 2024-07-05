@@ -1,6 +1,7 @@
-import "./games.css";
+import "./styles/games.css";
 import { useEffect, useState } from "react";
 import GameCard from "./components/game-card";
+import GameCardSkeleton from "./components/game-card-skeleton";
 
 interface TGameData {
   gameId: string;
@@ -37,7 +38,7 @@ export default function GameList() {
   return (
     <section className="game-list">
       {isLoading ? (
-        <div>loading...</div>
+        <GameCardSkeleton />
       ) : (
         games.map((game) => {
           return (
