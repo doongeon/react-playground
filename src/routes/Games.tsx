@@ -1,5 +1,9 @@
-import BreakGame from "../components/break_game/break_game";
+import GameList from "../components/game-list/games";
 
 export default function Games() {
-  return <BreakGame />;
+  return (
+    <>
+      <GameList />
+    </>
+  );
 }

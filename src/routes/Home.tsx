@@ -1,5 +1,5 @@
 import ContentSection from "../components/contents-section/ContentSection";
-import Intro from "../components/intro/Intro";
+import Intro from "../components/intro/intro";
 import Philosophy from "../components/philosophy/Philosophy";
 import TeacherSection from "../components/teacher-section/teacher-section";
 

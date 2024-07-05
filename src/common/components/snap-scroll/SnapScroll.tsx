@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import { GalleryPhoto } from "../../../components/philosophy/Philosophy";
-import { galleryModalOnAtom } from "../../../util/atom";
+import { galleryModalOnAtom } from "../../../utils/atom";
 import { useSetRecoilState } from "recoil";
 import "./snap-scroll.css";
 import {
