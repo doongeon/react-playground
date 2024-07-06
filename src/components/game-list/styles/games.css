@@ -12,6 +12,7 @@
   width: calc(100% - 80px);
   padding: 50px 40px;
   display: flex;
+  background-color: var(--section-bg-color);
   flex-direction: column;
   justify-content: center;
   gap: 50px;
@@ -43,7 +44,7 @@
 .game-card__text-container {
   left: 0;
   top: 0;
-  background-color: var(--main-bg-color);
+  background-color: var(--section-bg-color);
   padding: 15px 20px;
   width: calc(100% - 40px);
   display: flex;

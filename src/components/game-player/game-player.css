@@ -1,5 +1,6 @@
 .game-player {
   height: 1500px;
+  background-color: var(--section-bg-color);
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -22,6 +23,6 @@
 .game-player__git-anchor,
 .game-player__git-anchor:visited {
   font-size: 18px;
-  color: #0968DA;
+  color: #0968da;
   text-decoration: underline;
 }

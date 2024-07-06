@@ -10,6 +10,7 @@ body {
   text-rendering: optimizeLegibility;
 
   --main-bg-color: rgba(245, 245, 245, 1);
+  --section-bg-color: white;
   --main-text-color: #151837;
   --faded-text-color: #616165;
   -webkit-font-smoothing: antialiased;
