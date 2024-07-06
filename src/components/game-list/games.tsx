@@ -1,39 +1,10 @@
 import "./styles/games.css";
-import { useEffect, useState } from "react";
 import GameCard from "./components/game-card";
 import GameCardSkeleton from "./components/game-card-skeleton";
-
-interface TGameData {
-  gameId: string;
-  title: string;
-  discription: string;
-  thumbnail: string;
-  url: string;
-}
+import useGameList from "./hooks/useGameList";
 
 export default function GameList() {
-  const [isLoading, setLoading] = useState(true);
-  const [games, setGames] = useState<TGameData[]>([]);
-
-  const fetchGames = async () => {
-    try {
-      const response = await fetch(
-        "https://f5j1rhfaph.execute-api.ap-northeast-2.amazonaws.com/api/games"
-      );
-      if (!response.ok) throw new Error("fail to fetch games");
-
-      const json = await response.json();
-      setGames(json);
-    } catch (error) {
-      console.error("Error fetching games: ", error);
-    } finally {
-      setLoading(false);
-    }
-  };
-
-  useEffect(() => {
-    fetchGames();
-  }, []);
+  const { isLoading, games } = useGameList();
 
   return (
     <section className="game-list">
