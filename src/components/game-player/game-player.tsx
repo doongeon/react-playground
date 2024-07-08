@@ -16,6 +16,7 @@ export default function GamePlayer() {
   const iframeRef = useRef<HTMLIFrameElement | null>(null);
   const [isLoading, setLoading] = useState(true);
   const [game, setGame] = useState<TGameData | undefined>();
+  const [isError, setError] = useState(false);
 
   useEffect(() => {
     const fetchGame = async () => {
@@ -29,6 +30,7 @@ export default function GamePlayer() {
         setGame(json);
       } catch (error) {
         console.error("Error fetching games: ", error);
+        setError(true);
       } finally {
         setLoading(false);
       }
@@ -41,6 +43,8 @@ export default function GamePlayer() {
     <div className="game-player">
       {isLoading ? (
         <div>loading...</div>
+      ) : isError ? (
+        <div>Error</div>
       ) : (
         <>
           <h1 className="game-player__title">{game?.title}</h1>
@@ -54,7 +58,7 @@ export default function GamePlayer() {
               visit git repo
             </a>
           </div>
-          <iframe ref={iframeRef} src={game?.url} width="600" height="900" />
+          <iframe ref={iframeRef} src={game?.url} width="100%" height="900" />
           <Link to={"/games"}>목록으로</Link>
         </>
       )}
