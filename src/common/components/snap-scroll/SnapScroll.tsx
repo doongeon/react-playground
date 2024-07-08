@@ -20,7 +20,7 @@ export default function SnapScroll({ scrollItems }: SnapScrollProps) {
         currentIndex,
         isIntersecting,
         isAnimationEnd,
-        isLastSnapScrollItemIntersecting,
+        isLastIntersecting,
         onScroll,
         onClickScrollLeft,
         onClickScrollRight,
@@ -89,7 +89,7 @@ export default function SnapScroll({ scrollItems }: SnapScrollProps) {
                 >
                     <ArrowRightCircleIcon
                         className={`snap-scroll-btn__icon ${
-                            isLastSnapScrollItemIntersecting || !isAnimationEnd
+                            isLastIntersecting || !isAnimationEnd
                                 ? "snap-scroll-btn__icon-disabled"
                                 : ""
                         }`}
@@ -116,10 +116,7 @@ function useSnapScroll() {
     const [isScrolling, setScrolling] = useState(false);
     const [currentIndex, setCurrentIndex] = useState(0);
     const [isIntersecting, setIntersecting] = useState(false);
-    const [
-        isLastSnapScrollItemIntersecting,
-        setIsLastSnapScrollItemIntersecting,
-    ] = useState(false);
+    const [isLastIntersecting, setLastIntersecting] = useState(false);
 
     // observe whether scroller is intersecting
     useEffect(() => {
@@ -160,9 +157,9 @@ function useSnapScroll() {
         const observer = new IntersectionObserver(
             (entries: IntersectionObserverEntry[]) => {
                 if (entries[0].isIntersecting) {
-                    setIsLastSnapScrollItemIntersecting(() => true);
+                    setLastIntersecting(() => true);
                 } else {
-                    setIsLastSnapScrollItemIntersecting(() => false);
+                    setLastIntersecting(() => false);
                 }
             },
             {
@@ -211,7 +208,7 @@ function useSnapScroll() {
             snapScrollRef.current!.children
         ) as HTMLDivElement[];
 
-        if (!isLastSnapScrollItemIntersecting) {
+        if (!isLastIntersecting) {
             snapScrollItems[currentIndex + 1].scrollIntoView({
                 behavior: "smooth",
                 block: "nearest",
@@ -241,7 +238,7 @@ function useSnapScroll() {
         snapScrollRef,
         currentIndex,
         isAnimationEnd,
-        isLastSnapScrollItemIntersecting,
+        isLastIntersecting,
         isIntersecting,
         onScroll,
         onClickScrollLeft,
