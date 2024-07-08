@@ -187,24 +187,7 @@ function useSnapScroll() {
     // set closest item from scroll as current
     const onScroll = () => {
         setScrolling(() => true);
-        const snapScrollItems = Array.from(
-            snapScrollRef.current!.children
-        ) as HTMLDivElement[];
-        let currentIndex = 0;
-        let nearestDistance = 9999;
-        snapScrollItems.forEach((item, index) => {
-            const distance = Math.abs(
-                snapScrollRef.current!.scrollLeft -
-                    item.offsetLeft +
-                    item.offsetWidth / 2
-            );
-            if (distance < nearestDistance) {
-                nearestDistance = distance;
-                currentIndex = index;
-            }
-        });
-
-        setCurrentIndex(() => currentIndex);
+        setCurrentIndex(() => calculateNesrestElementIndex());
         setScrolling(() => false);
     };
 
@@ -242,6 +225,27 @@ function useSnapScroll() {
             });
         }
     };
+
+    function calculateNesrestElementIndex() {
+        const elements = Array.from(
+            snapScrollRef.current!.children
+        ) as HTMLDivElement[];
+        let result = 0;
+        let distance = 9999;
+        elements.forEach((element, index) => {
+            const distanceNow = Math.abs(
+                snapScrollRef.current!.scrollLeft -
+                    element.offsetLeft +
+                    element.offsetWidth / 2
+            );
+            if (distanceNow < distance) {
+                distance = distanceNow;
+                result = index;
+            }
+        });
+
+        return result;
+    }
 
     return {
         snapScrollRef,
