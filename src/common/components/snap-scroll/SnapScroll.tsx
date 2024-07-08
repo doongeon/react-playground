@@ -191,12 +191,12 @@ function useSnapScroll() {
             snapScrollRef.current!.children
         ) as HTMLDivElement[];
         let currentIndex = 0;
-        let nearestDistance = Math.abs(
-            snapScrollRef.current!.scrollLeft - snapScrollItems[0].offsetLeft
-        );
+        let nearestDistance = 9999;
         snapScrollItems.forEach((item, index) => {
             const distance = Math.abs(
-                snapScrollRef.current!.scrollLeft - item.offsetLeft
+                snapScrollRef.current!.scrollLeft -
+                    item.offsetLeft +
+                    item.offsetWidth / 2
             );
             if (distance < nearestDistance) {
                 nearestDistance = distance;
