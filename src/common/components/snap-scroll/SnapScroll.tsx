@@ -194,12 +194,7 @@ function useSnapScroll() {
     // scroll to right 1 item
     const onClickScrollRight = () => {
         if (isScrolling || !isAnimationEnd || isLastIntersecting) return;
-
-        const snapScrollItems = Array.from(
-            snapScrollRef.current!.children
-        ) as HTMLDivElement[];
-
-        snapScrollItems[currentIndex + 1].scrollIntoView({
+        snapScrollItems()[currentIndex + 1].scrollIntoView({
             behavior: "smooth",
             block: "nearest",
             inline: "start",
@@ -209,12 +204,7 @@ function useSnapScroll() {
     //scroll to left 1 item
     const onClickScrollLeft = () => {
         if (!isAnimationEnd || isScrolling || !currentIndex) return;
-
-        const snapScrollItems = Array.from(
-            snapScrollRef.current!.children
-        ) as HTMLDivElement[];
-
-        snapScrollItems[currentIndex - 1].scrollIntoView({
+        snapScrollItems()[currentIndex - 1].scrollIntoView({
             behavior: "smooth",
             block: "nearest",
             inline: "start",
@@ -240,6 +230,10 @@ function useSnapScroll() {
         });
 
         return result;
+    }
+
+    function snapScrollItems() {
+        return Array.from(snapScrollRef.current!.children) as HTMLDivElement[];
     }
 
     return {
