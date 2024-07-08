@@ -208,19 +208,17 @@ function useSnapScroll() {
 
     //scroll to left 1 item
     const onClickScrollLeft = () => {
-        if (!isAnimationEnd) return;
-        if (isScrolling) return;
+        if (!isAnimationEnd || isScrolling || !currentIndex) return;
+
         const snapScrollItems = Array.from(
             snapScrollRef.current!.children
         ) as HTMLDivElement[];
 
-        if (currentIndex > 0) {
-            snapScrollItems[currentIndex - 1].scrollIntoView({
-                behavior: "smooth",
-                block: "nearest",
-                inline: "start",
-            });
-        }
+        snapScrollItems[currentIndex - 1].scrollIntoView({
+            behavior: "smooth",
+            block: "nearest",
+            inline: "start",
+        });
     };
 
     function calculateNesrestElementIndex() {
