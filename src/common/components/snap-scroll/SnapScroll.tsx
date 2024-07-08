@@ -126,10 +126,15 @@ function useSnapScroll() {
             if (entries[0].isIntersecting) setIntersecting(() => true);
         };
 
+        const observerOption = {
+            threshold: 0.6,
+        };
+
         const observer = createIntersectingObserver({
             callback: scrollIntersectingCallback,
-            threshold: 0.6,
+            options: observerOption,
         });
+
         observer.observe(snapScrollRef.current!);
 
         return () => {
@@ -154,19 +159,23 @@ function useSnapScroll() {
         const lastSnapScrollItem = snapScrollRef.current
             ?.lastChild as HTMLElement;
 
-        const observer = new IntersectionObserver(
-            (entries: IntersectionObserverEntry[]) => {
-                if (entries[0].isIntersecting) {
-                    setLastIntersecting(() => true);
-                } else {
-                    setLastIntersecting(() => false);
-                }
-            },
-            {
-                threshold: 1.0,
-                rootMargin: "0px -10px 0px 0px",
+        const observerCallback = (entries: IntersectionObserverEntry[]) => {
+            if (entries[0].isIntersecting) {
+                setLastIntersecting(() => true);
+            } else {
+                setLastIntersecting(() => false);
             }
-        );
+        };
+
+        const observerOption = {
+            threshold: 1.0,
+            rootMargin: "0px -10px 0px 0px",
+        };
+
+        const observer = createIntersectingObserver({
+            callback: observerCallback,
+            options: observerOption,
+        });
 
         observer.observe(lastSnapScrollItem!);
 
