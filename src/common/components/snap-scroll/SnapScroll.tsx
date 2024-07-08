@@ -154,9 +154,8 @@ function useSnapScroll() {
 
     // observe last scroll item intersecting
     useEffect(() => {
-        const snapScrollItems = snapScrollRef.current?.children;
-        const lastSnapScrollItem =
-            snapScrollItems![snapScrollItems!.length - 1];
+        const lastSnapScrollItem = snapScrollRef.current
+            ?.lastChild as HTMLElement;
 
         const observer = new IntersectionObserver(
             (entries: IntersectionObserverEntry[]) => {
@@ -172,7 +171,7 @@ function useSnapScroll() {
             }
         );
 
-        observer.observe(lastSnapScrollItem);
+        observer.observe(lastSnapScrollItem!);
 
         return () => {
             observer.disconnect();
