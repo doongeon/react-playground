@@ -5,4 +5,5 @@ export const IMGAES = [
   "https://512pixels.net/wp-content/uploads/2020/06/11-0-Color-Day-thumbnails-768x768.jpg",
   "https://wallpapers.com/images/high/samsung-background-z3h7qg2rltts8umz.webp",
   "https://wallpapers.com/images/high/samsung-background-6d98mdwqoecxv0et.webp",
+  "https://wallpapers.com/images/high/black-and-red-berries-samsung-full-hd-6qvady67l095dglg.webp"
 ];
