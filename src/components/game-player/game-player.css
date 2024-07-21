@@ -8,6 +8,10 @@
   gap: 50px;
 }
 
+iframe {
+  border: none
+}
+
 .game-player__title {
   font-weight: bold;
   font-size: xx-large;
