@@ -1,23 +1,59 @@
 import { useEffect, useRef, useState } from "react";
 import createIntersectingObserver from "../Services/createIntersectingObserver";
 
-export default function useSnapScroll() {
+export default function useSnapScroll(
+    snapscrollContainerRef: React.RefObject<HTMLDivElement>
+) {
     const snapscrollRef = useRef<HTMLDivElement | null>(null);
     const [isAnimationEnd, setAnimationEnd] = useState(false);
     const [isScrolling, setScrolling] = useState(false);
     const [currentIndex, setCurrentIndex] = useState(0);
     const [isLastItemIntersecting, setLastItemIntersecting] = useState(false);
 
+    // set closest item from scroll as current
+    const updateScrollState = () => {
+        setScrolling(() => true);
+        setCurrentIndex(() => calculateNesrestElementIndex());
+        setScrolling(() => false);
+    };
+
+    // scroll to right 1 item
+    const scrollRight = () => {
+        if (isScrolling || !isAnimationEnd || isLastItemIntersecting) return;
+        snapScrollItems()[currentIndex + 1].scrollIntoView({
+            behavior: "smooth",
+            block: "nearest",
+            inline: "start",
+        });
+    };
+
+    //scroll to left 1 item
+    const scrollLeft = () => {
+        if (!isAnimationEnd || isScrolling || !currentIndex) return;
+        snapScrollItems()[currentIndex - 1].scrollIntoView({
+            behavior: "smooth",
+            block: "nearest",
+            inline: "start",
+        });
+    };
+
     // observe end of scroll items animation
     useEffect(() => {
-        const lastSnapScrollItem = snapscrollRef.current?.lastChild;
-        lastSnapScrollItem!.addEventListener("animationend", () =>
-            setAnimationEnd(() => true)
-        );
+        if (!snapscrollRef.current) return;
 
-        return lastSnapScrollItem!.removeEventListener("animationend", () =>
-            setAnimationEnd(() => true)
-        );
+        const lastSnapScrollItem = snapscrollRef.current.lastChild;
+        lastSnapScrollItem?.addEventListener("animationend", setAnimationIsEnd);
+
+        return () => {
+            lastSnapScrollItem?.removeEventListener(
+                "animationend",
+                setAnimationIsEnd
+            );
+        };
+
+        function setAnimationIsEnd() {
+            setAnimationEnd(() => true);
+        }
     }, []);
 
     // observe whether last scroll item is intersecting
@@ -50,32 +86,40 @@ export default function useSnapScroll() {
         };
     });
 
-    // set closest item from scroll as current
-    const updateScrollState = () => {
-        setScrolling(() => true);
-        setCurrentIndex(() => calculateNesrestElementIndex());
-        setScrolling(() => false);
-    };
+    // disable/activate scroll button
+    useEffect(() => {
+        if (!snapscrollContainerRef.current) return;
 
-    // scroll to right 1 item
-    const scrollRight = () => {
-        if (isScrolling || !isAnimationEnd || isLastItemIntersecting) return;
-        snapScrollItems()[currentIndex + 1].scrollIntoView({
-            behavior: "smooth",
-            block: "nearest",
-            inline: "start",
-        });
-    };
+        const [leftBtn, rightBtn] =
+            snapscrollContainerRef.current.querySelectorAll(
+                ".snap-scroll-btn__icon"
+            );
 
-    //scroll to left 1 item
-    const scrollLeft = () => {
-        if (!isAnimationEnd || isScrolling || !currentIndex) return;
-        snapScrollItems()[currentIndex - 1].scrollIntoView({
-            behavior: "smooth",
-            block: "nearest",
-            inline: "start",
-        });
-    };
+        if (currentIndex === 0 || !isAnimationEnd) {
+            disableButton(leftBtn);
+        } else {
+            activateButton(leftBtn);
+        }
+
+        if (isLastItemIntersecting || !isAnimationEnd) {
+            disableButton(rightBtn);
+        } else {
+            activateButton(rightBtn);
+        }
+
+        function disableButton(btn: Element) {
+            btn.classList.add("snap-scroll-btn__icon-disabled");
+        }
+
+        function activateButton(btn: Element) {
+            btn.classList.remove("snap-scroll-btn__icon-disabled");
+        }
+    }, [
+        snapscrollContainerRef,
+        currentIndex,
+        isAnimationEnd,
+        isLastItemIntersecting,
+    ]);
 
     function calculateNesrestElementIndex() {
         const elements = Array.from(
@@ -104,12 +148,7 @@ export default function useSnapScroll() {
 
     return {
         snapscrollRef,
-        states: {
-            currentIndex,
-            isAnimationEnd,
-            isLastItemIntersecting,
-        },
-        eventListeners: {
+        scrollHandler: {
             updateScrollState,
             scrollLeft,
             scrollRight,

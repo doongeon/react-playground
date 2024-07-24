@@ -7,22 +7,26 @@ import useGalleryModalOn from "./hooks/useGalleryModalOn";
 import useSnapScroll from "./hooks/useSnapScroll";
 import useFadeIn from "./hooks/useFadeIn";
 import "./snap-scroll.css";
+import { useRef } from "react";
 
 interface SnapScrollProps {
     scrollItems: GalleryPhoto[];
 }
 
 export default function Z_SnapScroll({ scrollItems }: SnapScrollProps) {
+    const snapscrollContainerRef = useRef<HTMLDivElement>(null);
+    const { snapscrollRef, scrollHandler } = useSnapScroll(
+        snapscrollContainerRef
+    );
     const turnOnGalleryModalState = useGalleryModalOn();
-    const { snapscrollRef, states, eventListeners } = useSnapScroll();
-    const { snapscrollContainerRef } = useFadeIn(states);
+    useFadeIn({ snapscrollContainerRef });
 
     return (
         <div className="snap-scroll-container" ref={snapscrollContainerRef}>
             <div
                 className="snap-scroll"
                 ref={snapscrollRef}
-                onScroll={eventListeners.updateScrollState}
+                onScroll={scrollHandler.updateScrollState}
             >
                 {scrollItems.map((scrollItem, index) => {
                     return (
@@ -58,28 +62,15 @@ export default function Z_SnapScroll({ scrollItems }: SnapScrollProps) {
             <div className={`snap-scroll-btn-container`}>
                 <button
                     className={`snap-scroll-btn`}
-                    onClick={eventListeners.scrollLeft}
+                    onClick={scrollHandler.scrollLeft}
                 >
-                    <ArrowLeftCircleIcon
-                        className={`snap-scroll-btn__icon ${
-                            states.currentIndex === 0 || !states.isAnimationEnd
-                                ? "snap-scroll-btn__icon-disabled"
-                                : ""
-                        }`}
-                    />
+                    <ArrowLeftCircleIcon className={`snap-scroll-btn__icon`} />
                 </button>
                 <button
                     className={`snap-scroll-btn`}
-                    onClick={eventListeners.scrollRight}
+                    onClick={scrollHandler.scrollRight}
                 >
-                    <ArrowRightCircleIcon
-                        className={`snap-scroll-btn__icon ${
-                            states.isLastItemIntersecting ||
-                            !states.isAnimationEnd
-                                ? "snap-scroll-btn__icon-disabled"
-                                : ""
-                        }`}
-                    />
+                    <ArrowRightCircleIcon className={`snap-scroll-btn__icon`} />
                 </button>
             </div>
         </div>
