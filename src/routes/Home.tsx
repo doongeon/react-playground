@@ -4,12 +4,12 @@ import Philosophy from "../components/philosophy/Philosophy";
 import TeacherSection from "../components/teacher-section/teacher-section";
 
 export default function Home() {
-  return (
-    <>
-      <Introduction />
-      <Philosophy />
-      <ContentSection />
-      <TeacherSection />
-    </>
-  );
+    return (
+        <>
+            <Introduction />
+            <Philosophy />
+            <ContentSection />
+            <TeacherSection />
+        </>
+    );
 }
