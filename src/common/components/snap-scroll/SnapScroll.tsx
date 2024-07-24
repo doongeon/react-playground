@@ -3,11 +3,11 @@ import {
     ArrowRightCircleIcon,
 } from "@heroicons/react/16/solid";
 import { GalleryPhoto } from "../../../components/philosophy/Philosophy";
-import useGalleryModalOn from "./hooks/useGalleryModalOn";
 import useSnapScroll from "./hooks/useSnapScroll";
 import useFadeIn from "./hooks/useFadeIn";
 import "./snap-scroll.css";
 import { useRef } from "react";
+import SnapscrollItem from "./components/snapscroll_item";
 
 interface SnapScrollProps {
     scrollItems: GalleryPhoto[];
@@ -18,7 +18,6 @@ export default function Z_SnapScroll({ scrollItems }: SnapScrollProps) {
     const { snapscrollRef, scrollHandler } = useSnapScroll(
         snapscrollContainerRef
     );
-    const turnOnGalleryModalState = useGalleryModalOn();
     useFadeIn({ snapscrollContainerRef });
 
     return (
@@ -30,32 +29,14 @@ export default function Z_SnapScroll({ scrollItems }: SnapScrollProps) {
             >
                 {scrollItems.map((scrollItem, index) => {
                     return (
-                        <div
+                        <SnapscrollItem
+                            index={index}
                             key={index}
-                            className={`snap-scroll-item-container`}
-                            style={{ animationDelay: `${index * 0.2}s` }}
-                        >
-                            <div
-                                className={`snap-scroll-item`}
-                                onClick={turnOnGalleryModalState}
-                            >
-                                <div className="snap-scroll-item__text-wrapper">
-                                    <h3 className="snap-scroll-item__title">
-                                        {scrollItem.title}
-                                    </h3>
-                                    <p className="snap-scroll-item__subtitle">
-                                        <span>{scrollItem.quote}</span>
-                                        <span>{scrollItem.source}</span>
-                                    </p>
-                                </div>
-                                <div className="snap-scroll-item__image-container">
-                                    <img
-                                        className="snap-scroll-item__image gallery-item__image"
-                                        src={scrollItem.photo}
-                                    />
-                                </div>
-                            </div>
-                        </div>
+                            title={scrollItem.title}
+                            quote={scrollItem.quote}
+                            source={scrollItem.source}
+                            photo={scrollItem.photo}
+                        />
                     );
                 })}
             </div>
