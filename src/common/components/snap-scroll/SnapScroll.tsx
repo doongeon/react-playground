@@ -15,7 +15,7 @@ interface SnapScrollProps {
 export default function Z_SnapScroll({ scrollItems }: SnapScrollProps) {
     const turnOnGalleryModalState = useGalleryModalOn();
     const { snapscrollRef, states, eventListeners } = useSnapScroll();
-    const { snapscrollContainerRef } = useFadeIn();
+    const { snapscrollContainerRef } = useFadeIn(states);
 
     return (
         <div className="snap-scroll-container" ref={snapscrollContainerRef}>
