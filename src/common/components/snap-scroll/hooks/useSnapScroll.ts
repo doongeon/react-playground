@@ -2,40 +2,15 @@ import { useEffect, useRef, useState } from "react";
 import createIntersectingObserver from "../Services/createIntersectingObserver";
 
 export default function useSnapScroll() {
-    const snapScrollRef = useRef<HTMLDivElement | null>(null);
+    const snapscrollRef = useRef<HTMLDivElement | null>(null);
     const [isAnimationEnd, setAnimationEnd] = useState(false);
     const [isScrolling, setScrolling] = useState(false);
     const [currentIndex, setCurrentIndex] = useState(0);
-    const [isIntersecting, setIntersecting] = useState(false);
     const [isLastItemIntersecting, setLastItemIntersecting] = useState(false);
-
-    // observe whether scroller is intersecting
-    useEffect(() => {
-        const scrollIntersectingCallback = (
-            entries: IntersectionObserverEntry[]
-        ) => {
-            if (entries[0].isIntersecting) setIntersecting(() => true);
-        };
-
-        const observerOption = {
-            threshold: 0.6,
-        };
-
-        const observer = createIntersectingObserver({
-            callback: scrollIntersectingCallback,
-            options: observerOption,
-        });
-
-        observer.observe(snapScrollRef.current!);
-
-        return () => {
-            observer.disconnect();
-        };
-    });
 
     // observe end of scroll items animation
     useEffect(() => {
-        const lastSnapScrollItem = snapScrollRef.current?.lastChild;
+        const lastSnapScrollItem = snapscrollRef.current?.lastChild;
         lastSnapScrollItem!.addEventListener("animationend", () =>
             setAnimationEnd(() => true)
         );
@@ -47,7 +22,7 @@ export default function useSnapScroll() {
 
     // observe whether last scroll item is intersecting
     useEffect(() => {
-        const lastSnapScrollItem = snapScrollRef.current
+        const lastSnapScrollItem = snapscrollRef.current
             ?.lastChild as HTMLElement;
 
         const observerCallback = (entries: IntersectionObserverEntry[]) => {
@@ -104,13 +79,13 @@ export default function useSnapScroll() {
 
     function calculateNesrestElementIndex() {
         const elements = Array.from(
-            snapScrollRef.current!.children
+            snapscrollRef.current!.children
         ) as HTMLDivElement[];
         let result = 0;
         let distance = 9999;
         elements.forEach((element, index) => {
             const distanceNow = Math.abs(
-                snapScrollRef.current!.scrollLeft -
+                snapscrollRef.current!.scrollLeft -
                     element.offsetLeft +
                     element.offsetWidth / 2
             );
@@ -124,16 +99,15 @@ export default function useSnapScroll() {
     }
 
     function snapScrollItems() {
-        return Array.from(snapScrollRef.current!.children) as HTMLDivElement[];
+        return Array.from(snapscrollRef.current!.children) as HTMLDivElement[];
     }
 
     return {
-        snapScrollRef,
+        snapscrollRef,
         states: {
             currentIndex,
             isAnimationEnd,
             isLastItemIntersecting,
-            isIntersecting,
         },
         eventListeners: {
             updateScrollState,

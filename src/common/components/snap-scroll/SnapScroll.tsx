@@ -1,35 +1,34 @@
-import { GalleryPhoto } from "../../../components/philosophy/Philosophy";
-import { galleryModalOnAtom } from "../../../utils/atom";
-import { useSetRecoilState } from "recoil";
-import "./snap-scroll.css";
 import {
     ArrowLeftCircleIcon,
     ArrowRightCircleIcon,
 } from "@heroicons/react/16/solid";
+import { GalleryPhoto } from "../../../components/philosophy/Philosophy";
+import useGalleryModalOn from "./hooks/useGalleryModalOn";
 import useSnapScroll from "./hooks/useSnapScroll";
+import useFadeIn from "./hooks/useFadeIn";
+import "./snap-scroll.css";
 
 interface SnapScrollProps {
     scrollItems: GalleryPhoto[];
 }
 
-export default function SnapScroll({ scrollItems }: SnapScrollProps) {
+export default function Z_SnapScroll({ scrollItems }: SnapScrollProps) {
     const turnOnGalleryModalState = useGalleryModalOn();
-    const { snapScrollRef, states, eventListeners } = useSnapScroll();
+    const { snapscrollRef, states, eventListeners } = useSnapScroll();
+    const { snapscrollContainerRef } = useFadeIn();
 
     return (
-        <div className="snap-scroll-container">
+        <div className="snap-scroll-container" ref={snapscrollContainerRef}>
             <div
                 className="snap-scroll"
-                ref={snapScrollRef}
+                ref={snapscrollRef}
                 onScroll={eventListeners.updateScrollState}
             >
                 {scrollItems.map((scrollItem, index) => {
                     return (
                         <div
                             key={index}
-                            className={`snap-scroll-item-container ${
-                                states.isIntersecting ? "fade-in-animation" : ""
-                            }`}
+                            className={`snap-scroll-item-container`}
                             style={{ animationDelay: `${index * 0.2}s` }}
                         >
                             <div
@@ -58,9 +57,7 @@ export default function SnapScroll({ scrollItems }: SnapScrollProps) {
             </div>
             <div className={`snap-scroll-btn-container`}>
                 <button
-                    className={`snap-scroll-btn ${
-                        states.isIntersecting ? "fade-in-animation" : ""
-                    }`}
+                    className={`snap-scroll-btn`}
                     onClick={eventListeners.scrollLeft}
                 >
                     <ArrowLeftCircleIcon
@@ -72,9 +69,7 @@ export default function SnapScroll({ scrollItems }: SnapScrollProps) {
                     />
                 </button>
                 <button
-                    className={`snap-scroll-btn ${
-                        states.isIntersecting ? "fade-in-animation" : ""
-                    }`}
+                    className={`snap-scroll-btn`}
                     onClick={eventListeners.scrollRight}
                 >
                     <ArrowRightCircleIcon
@@ -89,14 +84,4 @@ export default function SnapScroll({ scrollItems }: SnapScrollProps) {
             </div>
         </div>
     );
-}
-
-function useGalleryModalOn() {
-    const setIsGalleryModalOn = useSetRecoilState(galleryModalOnAtom);
-
-    function turnOnGalleryModalState() {
-        setIsGalleryModalOn(true);
-    }
-
-    return turnOnGalleryModalState;
 }
