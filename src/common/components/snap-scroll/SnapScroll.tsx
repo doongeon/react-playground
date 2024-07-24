@@ -1,3 +1,4 @@
+import "./snap-scroll.css";
 import {
     ArrowLeftCircleIcon,
     ArrowRightCircleIcon,
@@ -5,9 +6,9 @@ import {
 import { GalleryPhoto } from "../../../components/philosophy/Philosophy";
 import useSnapScroll from "./hooks/useSnapScroll";
 import useFadeIn from "./hooks/useFadeIn";
-import "./snap-scroll.css";
 import { useRef } from "react";
 import SnapscrollItem from "./components/snapscroll_item";
+import SnapscrollBtn from "./components/snapscroll_btn";
 
 interface SnapScrollProps {
     scrollItems: GalleryPhoto[];
@@ -41,18 +42,24 @@ export default function Z_SnapScroll({ scrollItems }: SnapScrollProps) {
                 })}
             </div>
             <div className={`snap-scroll-btn-container`}>
-                <button
-                    className={`snap-scroll-btn`}
+                <SnapscrollBtn
+                    key={"snap_scroll_btn_left"}
                     onClick={scrollHandler.scrollLeft}
-                >
-                    <ArrowLeftCircleIcon className={`snap-scroll-btn__icon`} />
-                </button>
-                <button
-                    className={`snap-scroll-btn`}
+                    children={
+                        <ArrowLeftCircleIcon
+                            className={`snap-scroll-btn__icon`}
+                        />
+                    }
+                />
+                <SnapscrollBtn
+                    key={"snap_scroll_btn_right"}
                     onClick={scrollHandler.scrollRight}
-                >
-                    <ArrowRightCircleIcon className={`snap-scroll-btn__icon`} />
-                </button>
+                    children={
+                        <ArrowRightCircleIcon
+                            className={`snap-scroll-btn__icon`}
+                        />
+                    }
+                />
             </div>
         </div>
     );
