@@ -2,7 +2,7 @@ interface ProgramCardProps {
     cardRef: React.RefObject<HTMLDivElement>;
 }
 
-export default function ProgrammingCard({ cardRef }: ProgramCardProps) {
+export default function MouseTrackingCard({ cardRef }: ProgramCardProps) {
     return (
         <div ref={cardRef} className="tracking-card">
             <pre>
