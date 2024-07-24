@@ -4,13 +4,13 @@ import useTrackingCard from "./hooks/useTrackingCard";
 import TextContainer from "./components/text_container";
 
 export default function Introduction() {
-    const { cardRef, onMouseEnter, onMouseLeave } = useTrackingCard();
+    const { cardRef, detectMouseEnter, detectMouseLeave } = useTrackingCard();
 
     return (
         <section
             className="intro-section"
-            onMouseEnter={onMouseEnter}
-            onMouseLeave={onMouseLeave}
+            onMouseEnter={detectMouseEnter}
+            onMouseLeave={detectMouseLeave}
         >
             <div className="intro-section__text-position-modifier">
                 <TextContainer
