@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import createIntersectingObserver from "../Services/createIntersectingObserver";
+import createIntersectingObserver from "../services/createIntersectingObserver";
 
 export default function useFadeIn({
     snapscrollContainerRef,
