@@ -16,9 +16,11 @@ interface SnapScrollProps {
 
 export default function Z_SnapScroll({ scrollItems }: SnapScrollProps) {
     const snapscrollContainerRef = useRef<HTMLDivElement>(null);
-    const { snapscrollRef, scrollHandler } = useSnapScroll(
-        snapscrollContainerRef
-    );
+    const snapscrollRef = useRef<HTMLDivElement>(null);
+    const { scrollHandler } = useSnapScroll({
+        snapscrollContainerRef,
+        snapscrollRef,
+    });
     useFadeIn({ snapscrollContainerRef });
 
     return (

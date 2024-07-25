@@ -1,10 +1,14 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import createIntersectingObserver from "../Services/createIntersectingObserver";
 
-export default function useSnapScroll(
-    snapscrollContainerRef: React.RefObject<HTMLDivElement>
-) {
-    const snapscrollRef = useRef<HTMLDivElement | null>(null);
+export default function useSnapScroll({
+    snapscrollContainerRef,
+    snapscrollRef,
+}: {
+    snapscrollContainerRef: React.RefObject<HTMLDivElement>;
+    snapscrollRef: React.RefObject<HTMLDivElement>;
+}) {
+    // const snapscrollRef = useRef<HTMLDivElement | null>(null);
     const [isAnimationEnd, setAnimationEnd] = useState(false);
     const [isScrolling, setScrolling] = useState(false);
     const [currentIndex, setCurrentIndex] = useState(0);
@@ -54,7 +58,7 @@ export default function useSnapScroll(
         function setAnimationIsEnd() {
             setAnimationEnd(() => true);
         }
-    }, []);
+    }, [snapscrollRef]);
 
     // observe whether last scroll item is intersecting
     useEffect(() => {
@@ -147,7 +151,6 @@ export default function useSnapScroll(
     }
 
     return {
-        snapscrollRef,
         scrollHandler: {
             updateScrollState,
             scrollLeft,
