@@ -14,7 +14,7 @@ export default function Profile() {
                     creating web, app services
                 </span>
                 <ul className="user_stat">
-                    <li>like</li>
+                    <li>좋아요</li>
                     <li>게임 3개</li>
                 </ul>
             </div>

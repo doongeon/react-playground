@@ -1,0 +1,60 @@
+{
+    "data": [
+        {
+            "id": 1,
+            "title": "망치처럼 단순하게",
+            "subtitle": "총은 단순해야해 망치처럼 말이지",
+            "description": "인간이 만들어 내지 못할 게 무엇이 있을까요? 컴퓨터처럼 인간이 만들어낸 복잡한 기계를 보면 마법 같다고 느껴지기도 합니다. 코드의 세계는 복잡할 수 있지만, 진정한 마법은 단순함에서 시작됩니다. 단순함은 망치처럼 강력합니다.",
+            "source": "영화 AK-47",
+            "image": "https://wallpapers.com/images/high/van-gogh-self-portrait-3dn06h1vqnmkw1if.webp"
+        },
+        {
+            "id": 2,
+            "title": "공학자",
+            "subtitle": "태도",
+            "description": "우리가 해결할 수 있는 문제에 최선을 다해 돕지 않는 것은, 공학을 배운 사람으로서 가져야 할 태도가 아니죠.",
+            "source": "안병준, 모아시스(주) 이사",
+            "image": "https://wallpapers.com/images/high/soft-and-fuzzy-balls-on-samsung-full-hd-807ed4i602bopbsz.webp"
+        },
+        {
+            "id": 3,
+            "title": "망치처럼 단순하게",
+            "subtitle": "",
+            "description": "총은 단순해야해 망치처럼 말이지",
+            "source": "영화 AK-47",
+            "image": "https://wallpapers.com/images/high/butterfly-made-of-dust-samsung-full-hd-rqybb2746byu7tfn.webp"
+        },
+        {
+            "id": 4,
+            "title": "망치처럼 단순하게",
+            "subtitle": "",
+            "description": "총은 단순해야해 망치처럼 말이지",
+            "source": "영화 AK-47",
+            "image": "https://512pixels.net/wp-content/uploads/2020/06/11-0-Color-Day-thumbnails-768x768.jpg"
+        },
+        {
+            "id": 5,
+            "title": "망치처럼 단순하게",
+            "subtitle": "",
+            "description": "총은 단순해야해 망치처럼 말이지",
+            "source": "영화 AK-47",
+            "image": "https://wallpapers.com/images/high/samsung-background-z3h7qg2rltts8umz.webp"
+        },
+        {
+            "id": 6,
+            "title": "망치처럼 단순하게",
+            "subtitle": "",
+            "description": "총은 단순해야해 망치처럼 말이지",
+            "source": "영화 AK-47",
+            "image": "https://wallpapers.com/images/high/samsung-background-6d98mdwqoecxv0et.webp"
+        },
+        {
+            "id": 7,
+            "title": "망치처럼 단순하게",
+            "subtitle": "",
+            "description": "총은 단순해야해 망치처럼 말이지",
+            "source": "영화 AK-47",
+            "image": "https://wallpapers.com/images/high/black-and-red-berries-samsung-full-hd-6qvady67l095dglg.webp"
+        }
+    ]
+}
