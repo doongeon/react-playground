@@ -44,7 +44,10 @@ export default function GamePlayer() {
             {isLoading ? (
                 <div>loading...</div>
             ) : isError ? (
-                <div>Error</div>
+                <>
+                    <div className="warning">그런 게임은 없어요! ⛔️</div>
+                    <Link to={"/games"}>목록으로</Link>
+                </>
             ) : (
                 <>
                     <h1 className="game-player__title">{game?.title}</h1>
