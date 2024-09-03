@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useRecoilState } from "recoil";
-import { gamesAtom } from "../../../utils/games-atom";
+import { gamesAtom } from "../../utils/games-atom";
 
 export default function useGameList() {
     const [isLoading, setLoading] = useState(true);
