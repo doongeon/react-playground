@@ -6,6 +6,6 @@
 
 ### 동건의 웹 게임
 
-[click here to visit](https://d2tx7yq7sk38e1.cloudfront.net/)
+[click here to visit](https://d2t6lweoml4q5z.cloudfront.net)
   
 </div>
