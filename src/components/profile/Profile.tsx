@@ -15,7 +15,7 @@ export default function Profile() {
                 </span>
                 <ul className="user_stat">
                     <li>좋아요</li>
-                    <li>게임 3개</li>
+                    <li>포스트 3개</li>
                 </ul>
             </div>
         </div>

@@ -1,78 +1,78 @@
 body {
-  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
-  margin: 0;
+    font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+    margin: 0;
 }
 
 :root {
-  color-scheme: light dark;
-  background-color: var(--main-bg-color);
-  color: var(--main-text-color);
-  text-rendering: optimizeLegibility;
+    color-scheme: light dark;
+    background-color: var(--main-bg-color);
+    color: var(--main-text);
+    text-rendering: optimizeLegibility;
 
-  --main-bg-color: rgba(245, 245, 245, 1);
-  --section-bg-color: white;
-  --main-text-color: #151837;
-  --faded-text-color: #616165;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+    --main-bg-color: rgba(3, 3, 3, 1);
+    --section-bg-color: rgba(3, 3, 3, 1);
+    --main-text: white;
+    --gray-text: #b4b4b4;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
 }
 
 @media (prefers-color-scheme: dark) {
-  :root {
-    background-color: var(--main-bg-color);
-    color: #213547;
-  }
+    :root {
+        background-color: var(--main-bg-color);
+        color: #213547;
+    }
 }
 
 ul {
-  padding: 0;
+    padding: 0;
 }
 
 a {
-  text-decoration: none;
+    text-decoration: none;
 }
 
 a:visited {
-  color: inherit;
-  text-decoration: none;
+    color: inherit;
+    text-decoration: none;
 }
 
 button {
-  background: none;
-  color: inherit;
-  border: none;
-  padding: 0;
-  font: inherit;
-  cursor: pointer;
-  outline: inherit;
+    background: none;
+    color: inherit;
+    border: none;
+    padding: 0;
+    font: inherit;
+    cursor: pointer;
+    outline: inherit;
 }
 
 p {
-  margin: 0;
+    margin: 0;
 }
 
 h1,
 h2,
 h3 {
-  margin: 0;
-  padding: 0;
-  border: 0;
-  font-size: 100%;
-  font: inherit;
-  vertical-align: baseline;
+    margin: 0;
+    padding: 0;
+    border: 0;
+    font-size: 100%;
+    font: inherit;
+    vertical-align: baseline;
 }
 
 @keyframes fadeIn {
-  0% {
-    opacity: 0;
-    transform: translateY(20px);
-  }
-  100% {
-    opacity: 1;
-    transform: translateY(0);
-  }
+    0% {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
 
 .fade-in-animation {
-  animation: fadeIn 1s forwards;
+    animation: fadeIn 1s forwards;
 }

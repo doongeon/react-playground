@@ -1,62 +1,78 @@
 :root {
-  --game-card-width: calc(100%);
+    --game-cardminmax: calc(100%);
 }
 
 @media (min-width: 440px) {
-  :root {
-    --game-card-width: 440px;
-  }
+    :root {
+        --game-card-width: 440px;
+    }
+}
+
+.game-section {
+    padding: 100px 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 100px;
+}
+
+.notice {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-size: large;
+
+    span:first-child {
+        font-size: xx-large;
+    }
 }
 
 .game-list {
-  width: calc(100% - 80px);
-  padding: 50px 40px;
-  display: flex;
-  background-color: var(--section-bg-color);
-  flex-direction: column;
-  justify-content: center;
-  gap: 50px;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(270px, 600px));
+    gap: 50px;
+    justify-content: center;
 }
 
 .game-card {
-  position: relative;
-  width: 100%;
-  max-width: var(--game-card-width);
-  margin: 0 auto;
-  border-radius: 15px;
-  transition: linear 0.1s;
-  cursor: pointer;
-  display: flex;
-  flex-direction: column;
-  overflow: hidden;
-  box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.2);
+    aspect-ratio: 4/3;
+    border-radius: 5px;
+    box-shadow: 0px 0px 30px rgba(255, 255, 255, 0.1);
+    transition: box-shadow 0.3s ease-in-out;
 }
 
 @media (hover: hover) {
-  .game-card:hover {
-    box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.3);
-  }
+    .game-card:hover {
+        box-shadow: 0px 0px 30px rgba(255, 255, 255, 0.3);
+    }
 }
+
+.game-card__img-container {
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+    position: relative;
+    aspect-ratio: 3/2;
+    overflow: hidden;
+}
+
 .game-card__img {
-  width: var(--game-card-width);
+    position: absolute;
+    width: 100%;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
 }
 
 .game-card__text-container {
-  left: 0;
-  top: 0;
-  background-color: var(--section-bg-color);
-  padding: 15px 20px;
-  width: calc(100% - 40px);
-  display: flex;
-  flex-direction: column;
+    padding: 10px;
+    color: var(--main-text);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
 }
 
 .game-card__title {
-  color: black;
-  font-weight: bold;
-  font-size: 24px;
+    font-size: large;
 }
 
 .game-card__description {
-  font-weight: bold;
 }
