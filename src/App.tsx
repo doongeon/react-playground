@@ -5,8 +5,12 @@ import Nav from "./components/nav/Nav";
 import Games from "./routes/Games";
 import Game from "./routes/Game";
 import NotFound from "./components/not-found/not-found";
+import Footer from "./components/footer/footer";
+import useGameList from "./common/hooks/useGameList";
 
 function App() {
+    useGameList();
+
     return (
         <BrowserRouter>
             <Profile />
@@ -17,6 +21,7 @@ function App() {
                 <Route path="/" element={<Home />} />
                 <Route path="*" element={<NotFound />} />
             </Routes>
+            <Footer />
         </BrowserRouter>
     );
 }
