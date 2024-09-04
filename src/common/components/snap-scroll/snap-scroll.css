@@ -5,7 +5,7 @@
     --snap-scroll-width: 100%;
     --scroll-x-margin: 35px;
     --scroll-item-transition-duration: 0.5s;
-    --title-font-size: 25px;
+    --title-font-size: 22px;
     --subtitle-font-size: 15px;
     --button-width: 30px;
     --scroll-container-margin-top: -15px;
@@ -16,7 +16,7 @@
     :root {
         --scroll-item-image-width: 275px;
         --scroll-item-image-height: 450px;
-        --title-font-size: 28px;
+        --title-font-size: 24px;
         --subtitle-font-size: 17px;
         --button-width: 45px;
         --scroll-container-margin-top: 0px;
@@ -27,7 +27,7 @@
     :root {
         --scroll-item-image-width: 300px;
         --scroll-item-image-height: 550px;
-        --title-font-size: 28px;
+        --title-font-size: 26px;
         --subtitle-font-size: 17px;
         --scroll-x-margin: 50px;
         --button-width: 45px;
@@ -39,7 +39,7 @@
     :root {
         --scroll-item-image-width: 380px;
         --scroll-item-image-height: 640px;
-        --title-font-size: 36px;
+        --title-font-size: 30px;
         --subtitle-font-size: 22px;
         --scroll-item-gap: 50px;
         --scroll-x-margin: 50px;
@@ -131,6 +131,7 @@
     padding-top: 40px;
     font-size: var(--title-font-size);
     font-weight: 800;
+    text-align: center;
 }
 
 .snap-scroll-item__subtitle {
