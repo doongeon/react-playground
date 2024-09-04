@@ -3,7 +3,7 @@ import useGalleryModalOn from "../hooks/useGalleryModalOn";
 interface SnapscrollItemProps {
     index: number;
     title: string;
-    quote: string;
+    quote?: string;
     source?: string;
     photo: string;
 }
@@ -34,8 +34,8 @@ export default function SnapscrollItem({
                 <div className="snap-scroll-item__text-wrapper">
                     <h3 className="snap-scroll-item__title">{title}</h3>
                     <p className="snap-scroll-item__subtitle">
-                        <span>{quote}</span>
-                        {source ? <span>{source}</span> : null}
+                        {quote ?? <span>{quote}</span>}
+                        {source ?? <span>{source}</span>}
                     </p>
                 </div>
                 <div className="snap-scroll-item__image-container">

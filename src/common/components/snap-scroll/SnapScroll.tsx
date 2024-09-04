@@ -3,15 +3,20 @@ import {
     ArrowLeftCircleIcon,
     ArrowRightCircleIcon,
 } from "@heroicons/react/16/solid";
-import { GalleryPhoto } from "../../../components/philosophy/Philosophy";
 import useSnapScroll from "./hooks/useSnapScroll";
 import useFadeIn from "./hooks/useFadeIn";
 import { useRef } from "react";
 import SnapscrollItem from "./components/snapscroll_item";
 import SnapscrollBtn from "./components/snapscroll_btn";
 
+export interface t_snapScrollItem {
+    title: string;
+    source: string;
+    img: string;
+}
+
 interface SnapScrollProps {
-    scrollItems: GalleryPhoto[];
+    scrollItems: t_snapScrollItem[];
 }
 
 export default function Z_SnapScroll({ scrollItems }: SnapScrollProps) {
@@ -36,9 +41,8 @@ export default function Z_SnapScroll({ scrollItems }: SnapScrollProps) {
                             index={index}
                             key={index}
                             title={scrollItem.title}
-                            quote={scrollItem.quote}
                             source={scrollItem.source}
-                            photo={scrollItem.photo}
+                            photo={scrollItem.img}
                         />
                     );
                 })}
