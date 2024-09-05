@@ -20,7 +20,7 @@ body {
 @media (prefers-color-scheme: dark) {
     :root {
         background-color: var(--main-bg-color);
-        color: #213547;
+        color: --main-text;
     }
 }
 
