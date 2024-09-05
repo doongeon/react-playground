@@ -3,6 +3,7 @@
     --spread-item-width: 110px;
     --spread-center-width: 130px;
     --spread-restart-btn-size: 35px;
+    --spread-center-font-size: 28px;
 }
 
 @media (min-width: 576px) {
@@ -11,6 +12,7 @@
         --spread-item-width: 200px;
         --spread-center-width: 300px;
         --spread-restart-btn-size: 45px;
+        --spread-center-font-size: 40px;
     }
 }
 
@@ -20,6 +22,7 @@
         --spread-item-width: 200px;
         --spread-center-width: 300px;
         --spread-restart-btn-size: 50px;
+        --spread-center-font-size: 50px;
     }
 }
 
@@ -28,6 +31,7 @@
         --spread-board-height: 700px;
         --spread-item-width: 200px;
         --spread-center-width: 300px;
+        --spread-center-font-size: 55px;
     }
 }
 
@@ -48,8 +52,9 @@
     left: 50%;
     top: 50%;
     width: var(--spread-center-width);
-    aspect-ratio: 4/3;
-    background-color: green;
+    font-size: var(--spread-center-font-size);
+    text-align: center;
+    font-weight: bold;
     z-index: 1;
     transform: translate(-50%, -50%);
 }
@@ -66,19 +71,10 @@
     transform: translate(-50%, -50%) scale(1.2);
 }
 
-.random-spread {
-    opacity: 1;
-    position: absolute;
-    top: calc(50% + var(--x) * 50%);
-    left: calc(50% + var(--y) * 50%);
-    transform: translate(-50%, -50%);
-    animation-duration: calc((var(--n) * 5s));
-}
-
 .spread1 {
     opacity: 1;
     position: absolute;
-    top: calc(var(--x) * 10% + 30%);
+    top: 20%;
     left: 40%;
     transform: translate(-50%, -50%);
     animation: floating linear infinite;
