@@ -1,7 +1,6 @@
-import { useRecoilValue, useSetRecoilState } from "recoil";
-import { restartSpreadAtom, spreadBoardIntersectingAtom } from "../atom";
+import { useSetRecoilState } from "recoil";
+import { spreadBoardIntersectingAtom } from "../atom";
 import { useEffect } from "react";
-import { getRandomDuration, getRandomPosition } from "../services";
 
 export default function useSpreadBoard({
     spreadBoardRef,
@@ -11,7 +10,6 @@ export default function useSpreadBoard({
     const setSpreadBoardIntersecting = useSetRecoilState(
         spreadBoardIntersectingAtom
     );
-    const restartAnimation = useRecoilValue(restartSpreadAtom);
 
     useEffect(() => {
         setSpreadBoardIntersecting(false);
@@ -25,17 +23,4 @@ export default function useSpreadBoard({
 
         observer.observe(spreadBoardRef.current!);
     });
-
-    useEffect(() => {
-        const spreadItems =
-            spreadBoardRef.current!.querySelectorAll<HTMLDivElement>(
-                ".spread_board__spread-item"
-            );
-
-        spreadItems?.forEach((spreadItem) => {
-            spreadItem.style.setProperty("--x", getRandomPosition() + "");
-            spreadItem.style.setProperty("--y", getRandomPosition() + "");
-            spreadItem.style.setProperty("--n", getRandomDuration() + "");
-        });
-    }, [spreadBoardRef, restartAnimation]);
 }
