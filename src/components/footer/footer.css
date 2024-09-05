@@ -1,3 +1,25 @@
+:root {
+    --footer-font-size: 12px;
+}
+
+@media (min-width: 576px) {
+    :root {
+        --footer-font-size: 14px;
+    }
+}
+
+@media (min-width: 768px) {
+    :root {
+        --footer-font-size: 14px;
+    }
+}
+
+@media (min-width: 992px) {
+    :root {
+        --footer-font-size: 16px;
+    }
+}
+
 .footer {
     position: relative;
     width: 100%;
@@ -16,10 +38,19 @@
     gap: 20px;
     align-items: center;
     z-index: 1;
-
+    font-size: var(--footer-font-size);
     & > span:first-child {
         font-size: large;
     }
+}
+
+.footer-link {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+    text-decoration: underline;
+    text-underline-offset: 5px;
 }
 
 .footer-img {
