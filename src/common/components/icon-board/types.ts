@@ -1,13 +1,8 @@
-export class IconBoardItem {
-  name: string;
-  avatar: string;
-
-  constructor(name: string, avatar: string) {
-    this.name = name;
-    this.avatar = avatar;
-  }
+export interface t_iconBoardItem {
+    name: string;
+    avatar: string;
 }
 
 export interface IconBoardProps {
-  boardItems: IconBoardItem[];
+    boardItems: t_iconBoardItem[];
 }
