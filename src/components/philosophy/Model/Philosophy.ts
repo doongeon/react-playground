@@ -1,6 +1,4 @@
-import Philosophy from "../Philosophy";
-
-export interface Philosophy {
+interface t_philosophy {
     title: string;
     subtitle?: string;
     sentence?: string;
@@ -8,7 +6,7 @@ export interface Philosophy {
     img: string;
 }
 
-export const philosopies: Array<Philosophy> = [
+export const philosopies: Array<t_philosophy> = [
     {
         title: "여동생과 놀 수 있는 무언가를 만들고 싶었다.",
         source: "Mark Zuckerberg",
