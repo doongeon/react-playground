@@ -18,7 +18,4 @@ export const contents: content[] = [
     {
         img: "images/spreadBorad_contents/animation.png",
     },
-    {
-        img: "images/spreadBorad_contents/tetris.png",
-    },
 ];
