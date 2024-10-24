@@ -9,7 +9,7 @@ export default function Nav() {
                     <li>홈</li>
                 </Link>
                 <Link to={"/games"} className="nav__btn">
-                    <li>포스트</li>
+                    <li>게임</li>
                 </Link>
             </ul>
         </>

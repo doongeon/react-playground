@@ -11,6 +11,8 @@
     padding: 10px;
     list-style: none;
     color: var(--main-text);
+    font-size: 20px;
+    transition: linear 0.2s;
 
     &:hover {
         text-decoration: underline;
