@@ -1,13 +1,13 @@
 import "./snap-scroll.css";
-import {
-    ArrowLeftCircleIcon,
-    ArrowRightCircleIcon,
-} from "@heroicons/react/16/solid";
-import useSnapScroll from "./hooks/useSnapScroll";
+// import {
+//     ArrowLeftCircleIcon,
+//     ArrowRightCircleIcon,
+// } from "@heroicons/react/16/solid";
+// import useSnapScroll from "./hooks/useSnapScroll";
 import useFadeIn from "./hooks/useFadeIn";
 import { useRef } from "react";
 import SnapscrollItem from "./components/snapscroll_item";
-import SnapscrollBtn from "./components/snapscroll_btn";
+// import SnapscrollBtn from "./components/snapscroll_btn";
 
 export interface t_snapScrollItem {
     title: string;
